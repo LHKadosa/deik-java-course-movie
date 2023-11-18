@@ -4,6 +4,7 @@ Egy interaktív, parancssori alkalmazást fogsz elkészíteni, amely
 adminisztrációs és információs felületként fog működni egy filmszínház
 személyzete és látogatói számára. 
 
+
 ## Hasznos információ az acceptance tesztek futtatása kapcsán
 
 * A ticket-service projekt package goal-jának egy `ticket-service-0.0.1-SNAPSHOT.jar` nevű, 
