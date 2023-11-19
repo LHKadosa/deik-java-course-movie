@@ -4,12 +4,9 @@ import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
 
-import java.util.Currency;
 import java.util.List;
 import java.util.Optional;
 
-import com.epam.training.ticketservice.core.user.persistence.User;
-import com.epam.training.ticketservice.core.user.persistence.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,16 +25,18 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public void updateMovie(String title, String genre, int duration) {
         Optional<Movie> movie = movieRepository.findByTitle(title);
-        movie.get().setTitle(title);
-        movie.get().setGenre(genre);
-        movie.get().setDuration(duration);
-        movieRepository.save(movie.get());
+        if(movie.isPresent()) {
+            movie.get().setTitle(title);
+            movie.get().setGenre(genre);
+            movie.get().setDuration(duration);
+            movieRepository.save(movie.get());
+        }
     }
 
     @Override
     public void deleteMovie(String title) {
         Optional<Movie> movie = movieRepository.findByTitle(title);
-        movieRepository.deleteById(movie.get().getId());
+        movie.ifPresent(value -> movieRepository.deleteById(value.getId()));
     }
 
     @Override
@@ -56,7 +55,4 @@ public class MovieServiceImpl implements MovieService{
                 .build();
     }
 
-    private Optional<MovieDto> createEntityFromDto(Optional<Movie> movie) {
-        return movie.map(this::createEntityFromDto);
-    }
 }
