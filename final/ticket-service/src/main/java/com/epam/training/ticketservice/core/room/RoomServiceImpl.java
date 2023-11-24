@@ -25,7 +25,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void updateRoom(String name, int rows, int columns) {
         Optional<Room> room = roomRepository.findByName(name);
-        if(room.isPresent()) {
+        if (room.isPresent()) {
             room.get().setName(name);
             room.get().setRows(rows);
             room.get().setColumns(columns);

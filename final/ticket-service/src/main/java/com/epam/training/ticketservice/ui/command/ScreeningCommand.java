@@ -37,9 +37,9 @@ public class ScreeningCommand {
     @ShellMethod(key = "list screenings", value = "List the available screenings.")
     public String listScreenings() {
         List<ScreeningDto> screeningList = screeningService.getScreeningList();
-        if(screeningList.isEmpty())
+        if (screeningList.isEmpty()) {
             return "There are no screenings";
-        else{
+        } else {
             StringBuilder result = new StringBuilder();
             screeningList.forEach(screening -> {
                 result.append(screening.getMovie().getTitle())

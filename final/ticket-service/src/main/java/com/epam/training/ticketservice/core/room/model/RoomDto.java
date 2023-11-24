@@ -9,7 +9,9 @@ public class RoomDto {
     private final int rows;
     private final int columns;
 
-    public static Builder builder() { return new Builder(); }
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public static class Builder {
 
@@ -27,11 +29,13 @@ public class RoomDto {
             return this;
         }
 
-        public Builder withColumns(int columns){
+        public Builder withColumns(int columns) {
             this.columns = columns;
             return this;
         }
 
-        public RoomDto build() { return new RoomDto(name, rows, columns); }
+        public RoomDto build() {
+            return new RoomDto(name, rows, columns);
+        }
     }
 }

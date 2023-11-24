@@ -34,7 +34,7 @@ public class UserCommand {
     public String print() {
         Optional<UserDto> user = userService.describe();
         if (!user.isEmpty() && user.get().role() == User.Role.ADMIN) {
-            return "Signed in with privileged account '" + user.get().username()+"'";
+            return "Signed in with privileged account '" + user.get().username() + "'";
         }
 
         return userService.describe()

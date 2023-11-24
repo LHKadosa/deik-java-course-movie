@@ -29,7 +29,7 @@ public class MovieDto {
             return this;
         }
 
-        public Builder withDuration(int duration){
+        public Builder withDuration(int duration) {
             this.duration = duration;
             return this;
         }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class inMemoryDatabaseInitializer {
+public class InMemoryDatabaseInitializer {
 
     private final UserRepository userRepository;
 

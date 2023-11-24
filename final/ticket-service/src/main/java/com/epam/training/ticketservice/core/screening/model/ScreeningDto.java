@@ -13,29 +13,33 @@ public class ScreeningDto {
     private final Room room;
     private final LocalDateTime startingTime;
 
-    public static Builder builder(){ return new Builder(); }
+    public static Builder builder() {
+        return new Builder();
+    }
 
-    public static class Builder{
+    public static class Builder {
 
         private Movie movie;
         private Room room;
         private LocalDateTime startingTime;
 
-        public Builder withMovie(Movie movie){
+        public Builder withMovie(Movie movie) {
             this.movie = movie;
             return this;
         }
 
-        public Builder withRoom(Room room){
+        public Builder withRoom(Room room) {
             this.room = room;
             return this;
         }
 
-        public Builder withStartingTime(LocalDateTime startingTime){
+        public Builder withStartingTime(LocalDateTime startingTime) {
             this.startingTime = startingTime;
             return this;
         }
 
-        public ScreeningDto build(){ return new ScreeningDto(movie,room,startingTime); }
+        public ScreeningDto build() {
+            return new ScreeningDto(movie,room,startingTime);
+        }
     }
 }

@@ -17,28 +17,32 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ScreeningServiceImpl implements ScreeningService{
+public class ScreeningServiceImpl implements ScreeningService {
 
     private final MovieRepository movieRepository;
     private final RoomRepository roomRepository;
     private final ScreeningRepository screeningRepository;
 
     @Override
-    public String createScreening(String movieString, String roomString, String startingTimeString){
+    public String createScreening(String movieString, String roomString, String startingTimeString) {
         Optional<Movie> movie = movieRepository.findByTitle(movieString);
         Optional<Room> room = roomRepository.findByName(roomString);
-        if(movie.isEmpty() || room.isEmpty()) return "Missing Movie or Room";
-        LocalDateTime startingTime = LocalDateTime.parse(startingTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        if (movie.isEmpty() || room.isEmpty()) {
+            return "Missing Movie or Room";
+        }
+        LocalDateTime startingTime = LocalDateTime.parse(startingTimeString,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
         Screening screening = new Screening(movie.get(), room.get(), startingTime);
 
         List<Screening> allOthers = screeningRepository.findAllByRoomName(roomString);
-        for(Screening other: allOthers){
-            if(screening.isOverlaping(other,true)){
-                if(screening.isOverlaping(other, false))
+        for (Screening other: allOthers) {
+            if (screening.isOverlaping(other,true)) {
+                if (screening.isOverlaping(other, false)) {
                     return "There is an overlapping screening";
-                else
+                } else {
                     return "This would start in the break period after another screening in this room";
+                }
             }
         }
 
@@ -48,8 +52,10 @@ public class ScreeningServiceImpl implements ScreeningService{
 
     @Override
     public String deleteScreening(String movieString, String roomString, String startingTimeString) {
-        LocalDateTime startingTime = LocalDateTime.parse(startingTimeString, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        Optional<Screening> screening = screeningRepository.findByMovieTitleAndRoomNameAndStartingTime(movieString,roomString,startingTime);
+        LocalDateTime startingTime = LocalDateTime.parse(startingTimeString,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        Optional<Screening> screening = screeningRepository
+                .findByMovieTitleAndRoomNameAndStartingTime(movieString,roomString,startingTime);
         screening.ifPresent(value -> screeningRepository.deleteById(value.getId()));
         return "Screening deleted!";
     }

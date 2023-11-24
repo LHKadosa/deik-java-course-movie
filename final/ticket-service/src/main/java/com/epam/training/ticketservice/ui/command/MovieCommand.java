@@ -58,9 +58,9 @@ public class MovieCommand {
     @ShellMethod(key = "list movies", value = "List the available movies.")
     public String listMovie() {
         List<MovieDto> movieList = movieService.getMovieList();
-        if(movieList.isEmpty())
+        if (movieList.isEmpty()) {
             return "There are no movies at the moment";
-        else{
+        } else {
             StringBuilder result = new StringBuilder();
             movieList.forEach(movie -> {
                 result.append(movie.getTitle())

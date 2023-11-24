@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MovieServiceImpl implements MovieService{
+public class MovieServiceImpl implements MovieService {
 
     private final MovieRepository movieRepository;
 
@@ -25,7 +25,7 @@ public class MovieServiceImpl implements MovieService{
     @Override
     public void updateMovie(String title, String genre, int duration) {
         Optional<Movie> movie = movieRepository.findByTitle(title);
-        if(movie.isPresent()) {
+        if (movie.isPresent()) {
             movie.get().setTitle(title);
             movie.get().setGenre(genre);
             movie.get().setDuration(duration);
