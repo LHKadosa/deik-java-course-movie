@@ -36,23 +36,15 @@ public class MovieCommand {
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "update movie", value = "Movie updating")
     public String updateMovie(String title, String genre, int duration) {
-        try {
-            movieService.updateMovie(title, genre, duration);
-            return "Updating was successful!";
-        } catch (Exception e) {
-            return "Updating failed!";
-        }
+        movieService.updateMovie(title, genre, duration);
+        return "Updating was successful!";
     }
 
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "delete movie", value = "Movie deleting")
     public String deleteMovie(String title) {
-        try {
-            movieService.deleteMovie(title);
-            return "Deletion was successful!";
-        } catch (Exception e) {
-            return "Deletion failed!";
-        }
+        movieService.deleteMovie(title);
+        return "Deletion was successful!";
     }
 
     @ShellMethod(key = "list movies", value = "List the available movies.")

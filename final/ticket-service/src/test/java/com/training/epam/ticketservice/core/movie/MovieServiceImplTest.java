@@ -11,6 +11,7 @@ import static org.mockito.Mockito.*;
 import com.epam.training.ticketservice.core.movie.model.MovieDto;
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class MovieServiceImplTest {
 
@@ -34,7 +35,7 @@ class MovieServiceImplTest {
         List<MovieDto> actual = underTest.getMovieList();
 
         // Then
-        assertEquals(expected, actual);
+        assertThat(expected).usingRecursiveComparison().isEqualTo(actual);
     }
 
     @Test

@@ -2,6 +2,8 @@ package com.training.epam.ticketservice.core.screening;
 
 import com.epam.training.ticketservice.core.movie.persistence.Movie;
 import com.epam.training.ticketservice.core.movie.persistence.MovieRepository;
+import com.epam.training.ticketservice.core.room.RoomService;
+import com.epam.training.ticketservice.core.room.RoomServiceImpl;
 import com.epam.training.ticketservice.core.room.persistence.Room;
 import com.epam.training.ticketservice.core.room.persistence.RoomRepository;
 import com.epam.training.ticketservice.core.screening.ScreeningServiceImpl;
@@ -11,12 +13,12 @@ import com.epam.training.ticketservice.core.screening.persistence.ScreeningRepos
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ScreeningServiceImplTest {
 
@@ -34,7 +36,7 @@ public class ScreeningServiceImplTest {
     private final ScreeningRepository screeningRepository = mock(ScreeningRepository.class);
     private final MovieRepository movieRepository = mock(MovieRepository.class);
     private final RoomRepository roomRepository = mock(RoomRepository.class);
-    private final ScreeningServiceImpl underTest = new ScreeningServiceImpl(movieRepository,roomRepository,screeningRepository);
+    private final ScreeningServiceImpl underTest = new ScreeningServiceImpl(movieRepository, roomRepository, screeningRepository);
 
     @Test
     void testGetScreeningListShouldReturnTheScreeningWhenItExists() {
@@ -47,5 +49,22 @@ public class ScreeningServiceImplTest {
 
         // Then
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testGetScreeningListShouldReturnEmptyWhenItDoesntExist() {
+        when(screeningRepository.findAll()).thenReturn(List.of());
+        List<ScreeningDto> expected = List.of();
+
+        List<ScreeningDto> actual = underTest.getScreeningList();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void canDeleteScreening() {
+        String result = underTest.deleteScreening(DTO.getMovie().toString(), DTO.getRoom().toString(), "2021-03-15 11:00");
+
+        assertEquals(result, "Screening deleted!");
     }
 }

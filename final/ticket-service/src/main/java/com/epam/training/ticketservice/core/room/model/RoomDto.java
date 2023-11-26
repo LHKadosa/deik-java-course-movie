@@ -2,12 +2,31 @@ package com.epam.training.ticketservice.core.room.model;
 
 import lombok.Value;
 
-@Value
 public class RoomDto {
 
     private final String name;
     private final int rows;
     private final int columns;
+
+    public RoomDto(final Builder builder) {
+        this.name = builder.name;
+        ;
+        this.rows = builder.rows;
+        ;
+        this.columns = builder.columns;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getRows() {
+        return this.rows;
+    }
+
+    public int getColumns() {
+        return this.columns;
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -35,7 +54,7 @@ public class RoomDto {
         }
 
         public RoomDto build() {
-            return new RoomDto(name, rows, columns);
+            return new RoomDto(this);
         }
     }
 }

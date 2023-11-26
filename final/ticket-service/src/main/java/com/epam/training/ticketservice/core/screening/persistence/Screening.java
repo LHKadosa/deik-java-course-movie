@@ -35,12 +35,6 @@ public class Screening {
         this.startingTime = startingTime;
     }
 
-    public Screening(ScreeningDto screeningDto) {
-        this.movie = screeningDto.getMovie();
-        this.room = screeningDto.getRoom();
-        this.startingTime = screeningDto.getStartingTime();
-    }
-
     public boolean isOverlaping(Screening other, boolean withBreak) {
         LocalDateTime start = getStartingTime();
         LocalDateTime end = start.plusMinutes(movie.getDuration() + (withBreak ? 10 : 0));

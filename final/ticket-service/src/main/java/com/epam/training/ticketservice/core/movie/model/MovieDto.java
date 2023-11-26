@@ -1,13 +1,42 @@
 package com.epam.training.ticketservice.core.movie.model;
 
-import lombok.Value;
+import org.apache.maven.surefire.shade.org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.maven.surefire.shade.org.apache.commons.lang3.builder.ToStringStyle;
 
-@Value
 public class MovieDto {
 
-    private final String title;
-    private final String genre;
-    private final int duration;
+    private String title;
+    private String genre;
+    private int duration;
+
+    public MovieDto(String title, String genre, int duration){
+        this.title = title;
+        this.genre = genre;
+        this.duration = duration;
+    }
+
+    public MovieDto(final Builder builder){
+        this.title = builder.title;
+        this.genre = builder.genre;
+        this.duration = builder.duration;
+    }
+
+    public String getTitle(){
+        return this.title;
+    }
+
+    public String getGenre(){
+        return this.genre;
+    }
+
+    public int getDuration(){
+        return this.duration;
+    }
+
+    @Override
+    public String toString(){
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.DEFAULT_STYLE);
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -35,7 +64,7 @@ public class MovieDto {
         }
 
         public MovieDto build() {
-            return new MovieDto(title, genre, duration);
+            return new MovieDto(this);
         }
     }
 }

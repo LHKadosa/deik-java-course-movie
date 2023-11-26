@@ -25,34 +25,22 @@ public class RoomCommand {
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "create room", value = "Room creation")
     public String createRoom(String name, int rows, int columns) {
-        try {
-            roomService.createRoom(name, rows, columns);
-            return "Creation was successful!";
-        } catch (Exception e) {
-            return "Creation failed!";
-        }
+        roomService.createRoom(name, rows, columns);
+        return "Creation was successful!";
     }
 
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "update room", value = "Room updating")
     public String updateRoom(String name, int rows, int columns) {
-        try {
-            roomService.updateRoom(name, rows, columns);
-            return "Updating was successful!";
-        } catch (Exception e) {
-            return "Updating failed!";
-        }
+        roomService.updateRoom(name, rows, columns);
+        return "Updating was successful!";
     }
 
     @ShellMethodAvailability("isAvailable")
     @ShellMethod(key = "delete room", value = "Room deleting")
     public String deleteRoom(String name) {
-        try {
-            roomService.deleteRoom(name);
-            return "Deletion was successful!";
-        } catch (Exception e) {
-            return "Deletion failed!";
-        }
+        roomService.deleteRoom(name);
+        return "Deletion was successful!";
     }
 
     @ShellMethod(key = "list rooms", value = "List the available rooms.")
