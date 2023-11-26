@@ -29,10 +29,4 @@ public class Movie {
         this.genre = genre;
         this.duration = duration;
     }
-
-    public Movie(MovieDto movieDto) {
-        this.title = movieDto.getTitle();
-        this.genre = movieDto.getGenre();
-        this.duration = movieDto.getDuration();
-    }
 }
